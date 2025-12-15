@@ -1,0 +1,47 @@
+name: Deploy to opBNB Testnet
+
+on:
+  workflow_dispatch:
+    inputs:
+      network:
+        description: 'Network to deploy to'
+        required: true
+        default: 'opbnb-testnet'
+        type: choice
+        options:
+          - opbnb-testnet
+          - opbnb-mainnet
+
+jobs:
+  deploy:
+    name: Deploy Contracts
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.network }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile contracts
+        run: npm run compile
+
+      - name: Deploy to ${{ github.event.inputs.network }}
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          OPBNBSCAN_API_KEY: ${{ secrets.OPBNBSCAN_API_KEY }}
+        run: npx hardhat run scripts/deploy.ts --network ${{ github.event.inputs.network }}
+
+      - name: Save deployment artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-${{ github.event.inputs.network }}
+          path: |
+            artifacts/
+            cache/

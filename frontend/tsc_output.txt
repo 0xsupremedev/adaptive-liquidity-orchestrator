@@ -1,0 +1,4 @@
+﻿src/components/HeroBackground.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ui/line-shadow-text.tsx(28,13): error TS2322: Type '{ children: string; defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; suppressHydrationWarning?: boolean | undefined; ... 314 more ...; "data-text": string; }' is not assignable to type 'IntrinsicAttributes & MotionProps & RefAttributes<HTMLElement | SVGElement>'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & MotionProps & RefAttributes<HTMLElement | SVGElement>'.
+src/pages/Landing.tsx(18,5): error TS6133: 'Cpu' is declared but its value is never read.
