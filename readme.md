@@ -1,4 +1,4 @@
-# 🔶 Adaptive Liquidity Orchestrator
+# Adaptive Liquidity Orchestrator
 
 **AI-Driven DEX Liquidity Manager on opBNB**
 
@@ -10,7 +10,7 @@
 
 ![Adaptive Liquidity Banner](docs/banner.png)
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -37,7 +37,7 @@
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 DeFi liquidity providers face significant challenges:
 - **Impermanent Loss (IL)**: Up to 40% loss in volatile markets.
@@ -45,7 +45,7 @@ DeFi liquidity providers face significant challenges:
 - **High Slippage**: Large trades on thin pools incur heavy slippage.
 - **Static LP Positions**: Most LPs use V2-style pools without optimization.
 
-## 💡 Solution
+## Solution
 
 **Adaptive Liquidity Orchestrator** uses AI-driven algorithms to automatically manage LP positions:
 1. **Real-time Volatility Monitoring**: Tracks market conditions using simple-statistics and on-chain data.
@@ -55,7 +55,7 @@ DeFi liquidity providers face significant challenges:
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ```mermaid
 flowchart TB
@@ -96,7 +96,7 @@ flowchart TB
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 20+
@@ -145,7 +145,7 @@ VITE_THIRDWEB_CLIENT_ID=your_thirdweb_client_id
 
 ---
 
-## 📊 AI Strategy Overview
+## AI Strategy Overview
 
 The optimizer uses **volatility-based heuristics**:
 
@@ -158,9 +158,9 @@ The optimizer uses **volatility-based heuristics**:
 
 ---
 
-## 🏆 BNB Hackathon 2025
+## BNB Hackathon 2025
 
-Built with ❤️ for the **BNB Chain Hackathon 2025**.
+Built for the **BNB Chain Hackathon 2025**.
 
 - **Innovation**: First AI-driven LP manager on opBNB.
 - **Integration**: Native opBNB L2 deployment, Thirdweb Auth, RainbowKit.
@@ -168,6 +168,6 @@ Built with ❤️ for the **BNB Chain Hackathon 2025**.
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

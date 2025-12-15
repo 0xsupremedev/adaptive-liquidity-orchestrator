@@ -12,12 +12,14 @@ import {
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { LineShadowText } from '../components/ui/line-shadow-text';
 import { useAccount } from 'wagmi';
+import { SiBinance, SiTether, SiEthereum } from 'react-icons/si';
+import { BsCoin } from 'react-icons/bs';
 
 const tokens = [
-    { address: '0x4200000000000000000000000000000000000006', symbol: 'WBNB', name: 'Wrapped BNB', icon: '🔶' },
-    { address: '0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f3', symbol: 'USDT', name: 'Tether USD', icon: '💵' },
-    { address: '0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f4', symbol: 'USDC', name: 'USD Coin', icon: '💰' },
-    { address: '0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f5', symbol: 'ETH', name: 'Ethereum', icon: '💎' },
+    { address: '0x4200000000000000000000000000000000000006', symbol: 'WBNB', name: 'Wrapped BNB', icon: <SiBinance className="w-6 h-6 text-[#F0B90B]" /> },
+    { address: '0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f3', symbol: 'USDT', name: 'Tether USD', icon: <SiTether className="w-6 h-6 text-[#26A17B]" /> },
+    { address: '0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f4', symbol: 'USDC', name: 'USD Coin', icon: <BsCoin className="w-6 h-6 text-[#2775CA]" /> },
+    { address: '0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f5', symbol: 'ETH', name: 'Ethereum', icon: <SiEthereum className="w-6 h-6 text-[#627EEA]" /> },
 ];
 
 const strategies = [
