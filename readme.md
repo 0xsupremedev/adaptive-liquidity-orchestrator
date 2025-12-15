@@ -8,7 +8,8 @@
 
 > **Reduce slippage and impermanent loss with intelligent liquidity rebalancing. The first AI-driven DEX liquidity orchestrator on opBNB.**
 
-![Adaptive Liquidity Banner](docs/banner.png)
+<img width="1859" height="1079" alt="image" src="https://github.com/user-attachments/assets/b2e96acc-c826-4858-9d18-85b7d5a6b2e5" />
+
 
 ## Tech Stack
 
@@ -169,5 +170,6 @@ Built for the **BNB Chain Hackathon 2025**.
 ---
 
 ## License
+
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
