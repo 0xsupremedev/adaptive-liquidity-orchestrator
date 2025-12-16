@@ -11,9 +11,10 @@ import {
 } from 'lucide-react';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { LineShadowText } from '../components/ui/line-shadow-text';
-import { useAccount } from 'wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
 import { SiBinance, SiTether, SiEthereum } from 'react-icons/si';
 import { BsCoin } from 'react-icons/bs';
+import { VAULT_MANAGER_ABI, VAULT_MANAGER_ADDRESS } from '../config/contracts';
 
 const tokens = [
     { address: '0x4200000000000000000000000000000000000006', symbol: 'WBNB', name: 'Wrapped BNB', icon: <SiBinance className="w-6 h-6 text-[#F0B90B]" /> },
@@ -63,12 +64,57 @@ export default function VaultCreate() {
     const [tokenB, setTokenB] = useState('');
     const [strategy, setStrategy] = useState('moderate');
 
-    const handleCreate = () => {
-        // In production, this would trigger the on-chain transaction
-        console.log('Creating vault:', { tokenA, tokenB, strategy });
+    const [isCreating, setIsCreating] = useState(false);
+    const { writeContractAsync } = useWriteContract();
 
-        // Navigate to dashboard after "creation"
-        navigate('/dashboard');
+    // Strategy Parameters Map
+    const getStrategyParams = (type: string) => {
+        switch (type) {
+            case 'conservative': // +/- 10% approx
+                return { tickLower: -8872, tickUpper: 8872, rebalanceThreshold: BigInt(1000), autoRebalance: true };
+            case 'aggressive': // +/- 1% approx
+                return { tickLower: -887, tickUpper: 887, rebalanceThreshold: BigInt(200), autoRebalance: true };
+            case 'moderate': // +/- 5% approx
+            default:
+                return { tickLower: -4436, tickUpper: 4436, rebalanceThreshold: BigInt(500), autoRebalance: true };
+        }
+    };
+
+    const handleCreate = async () => {
+        if (!tokenA || !tokenB) return;
+
+        setIsCreating(true);
+        try {
+            // Import dynamically to avoid circular dependencies if any, or just standard import
+            // For now assuming implicit global or standard import availability
+
+            const params = getStrategyParams(strategy);
+
+            console.log('Creating vault with:', { tokenA, tokenB, params });
+
+            const hash = await writeContractAsync({
+                address: VAULT_MANAGER_ADDRESS,
+                abi: VAULT_MANAGER_ABI,
+                functionName: 'createVault',
+                args: [
+                    tokenA as `0x${string}`,
+                    tokenB as `0x${string}`,
+                    params
+                ],
+            });
+
+            console.log('Transaction sent:', hash);
+            // In a real app we would wait for receipt here using useWaitForTransactionReceipt
+            // But for detailed feedback we often separate the waiting logic.
+
+            alert(`Transaction sent! Hash: ${hash}`);
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Failed to create vault:', error);
+            alert('Failed to create vault. See console for details.');
+        } finally {
+            setIsCreating(false);
+        }
     };
 
     const getTokenByAddress = (addr: string) => tokens.find(t => t.address === addr);
@@ -318,13 +364,13 @@ export default function VaultCreate() {
 
                             <ShimmerButton
                                 onClick={handleCreate}
-                                disabled={!isConnected}
+                                disabled={!isConnected || isCreating}
                                 className="w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed bg-orange-500 hover:bg-orange-600 shadow-xl py-3"
                             >
                                 {isConnected ? (
                                     <>
-                                        Create Vault
-                                        <Zap className="w-5 h-5" />
+                                        {isCreating ? 'Creating Vault...' : 'Create Vault'}
+                                        {!isCreating && <Zap className="w-5 h-5" />}
                                     </>
                                 ) : (
                                     'Connect Wallet to Create'

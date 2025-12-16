@@ -15,7 +15,7 @@ import {
     Lock,
     PauseCircle,
     FileCode,
-    Cpu
+
 } from 'lucide-react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
@@ -49,8 +49,8 @@ export default function Landing() {
     return (
         <div className="relative min-h-screen bg-transparent overflow-hidden selection:bg-orange-500/20">
 
-            {/* 2️⃣ Hero Section */}
-            {/* 2️⃣ Hero Section */}
+            {/* Hero Section */}
+            {/* Hero Section */}
             <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-transparent">
                 <div className="relative z-10 text-center px-4 max-w-6xl mx-auto mt-[-50px]">
                     <div className="mb-12 flex justify-center">
@@ -93,7 +93,7 @@ export default function Landing() {
                 </div>
             </section>
 
-            {/* 3️⃣ Problem Section */}
+            {/* Problem Section */}
             <section id="problem" className="py-24 bg-card/50">
                 <div className="max-w-7xl mx-auto px-4 text-center">
                     <motion.h2
@@ -140,7 +140,7 @@ export default function Landing() {
                 </div>
             </section>
 
-            {/* 4️⃣ Solution Section */}
+            {/* Solution Section */}
             <section id="solution" className="py-24 px-4 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -210,7 +210,7 @@ export default function Landing() {
                 </div>
             </section>
 
-            {/* 6️⃣ Live Metrics */}
+            {/* Live Metrics */}
             <section className="py-20 bg-primary/5 border-y border-primary/10">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -235,7 +235,7 @@ export default function Landing() {
                 </div>
             </section>
 
-            {/* 5️⃣ How It Works */}
+            {/* How It Works */}
             <section id="how-it-works" className="py-24 px-4">
                 <div className="max-w-7xl mx-auto">
                     <motion.div className="text-center mb-16" {...fadeInUp}>
@@ -268,7 +268,7 @@ export default function Landing() {
                 </div>
             </section>
 
-            {/* 9️⃣ Vaults Section (Preview) */}
+            {/* Vaults Section (Preview) */}
             <section id="vaults" className="py-24 bg-card/50 px-4">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex justify-between items-end mb-12">
@@ -313,7 +313,7 @@ export default function Landing() {
                 </div>
             </section>
 
-            {/* 8️⃣ Security Section */}
+            {/* Security Section */}
             <section id="security" className="py-24 px-4 overflow-hidden relative">
                 <div className="absolute inset-0 bg-primary/5 skew-y-3 transform origin-top-left -z-10" />
                 <div className="max-w-7xl mx-auto px-4">
@@ -344,7 +344,7 @@ export default function Landing() {
             </section>
 
 
-            {/* 🔟 Roadmap & Community */}
+            {/* Roadmap & Community */}
             <section id="roadmap" className="py-24 bg-card px-4 border-t">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
                     <div>
@@ -388,7 +388,7 @@ export default function Landing() {
                 </div>
             </section>
 
-            {/* 1️⃣2️⃣ Footer */}
+            {/* Footer */}
             <footer className="py-12 border-t px-4 bg-background">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
                     <div className="flex items-center gap-2">

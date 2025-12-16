@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import {
     Plus,
     TrendingUp,
-    TrendingDown,
     Wallet,
     Activity,
     Zap,
@@ -81,9 +80,7 @@ export default function Dashboard() {
         }
     };
 
-    const formatAddress = (addr: string) => {
-        return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-    };
+
 
     const getTokenSymbol = (address: string) => {
         if (address.toLowerCase().includes('4200')) return 'WBNB';
@@ -95,55 +92,105 @@ export default function Dashboard() {
         <div className="min-h-screen px-4 py-8">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
                     <div>
                         <h1 className="text-3xl font-bold mb-2">
                             <LineShadowText className="text-foreground" shadowColor="white">
                                 Dashboard
                             </LineShadowText>
                         </h1>
-                        <p className="text-muted-foreground">
-                            {isConnected
-                                ? `Connected: ${formatAddress(address!)}`
-                                : 'Connect your wallet to view your vaults'}
-                        </p>
                     </div>
 
-                    <Link to="/vaults/create">
-                        <ShimmerButton className="bg-orange-500 hover:bg-orange-600 shadow-lg px-6 py-2">
-                            <Plus className="w-5 h-5 mr-2" />
-                            Create Vault
-                        </ShimmerButton>
-                    </Link>
+                    <div className="flex items-center gap-3">
+                        <Link to="/vaults/create">
+                            <ShimmerButton className="bg-orange-500 hover:bg-orange-600 shadow-lg px-6 py-2">
+                                <Plus className="w-5 h-5 mr-2" />
+                                Create Vault
+                            </ShimmerButton>
+                        </Link>
+                    </div>
                 </div>
 
-                {/* Stats Overview */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                    {[
-                        { label: 'Total TVL', value: '$12,450', change: '+5.2%', icon: Wallet, positive: true },
-                        { label: 'Fees Earned', value: '$156.80', change: '+12.3%', icon: TrendingUp, positive: true },
-                        { label: 'IL Saved', value: '$89.20', change: '-2.1%', icon: TrendingDown, positive: true },
-                        { label: 'Rebalances', value: '7', change: 'This week', icon: Activity, positive: null },
-                    ].map((stat, index) => (
+                {/* Wallet & Stats Header */}
+                <div className="grid lg:grid-cols-3 gap-6 mb-8">
+                    {/* Left: Wallet & Balances */}
+                    <div className="lg:col-span-2 space-y-6">
+                        <div className="card p-6 bg-gradient-to-br from-card to-background border border-border/50">
+                            <div className="flex items-center justify-between mb-6">
+                                <div>
+                                    <h2 className="text-xl font-bold flex items-center gap-2">
+                                        <Wallet className="w-5 h-5 text-primary" />
+                                        Portfolio Overview
+                                    </h2>
+                                    <p className="text-muted-foreground text-sm flex items-center gap-2 mt-1">
+                                        {isConnected ? (
+                                            <>
+                                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                                                Live on opBNB Testnet
+                                            </>
+                                        ) : (
+                                            'Connect wallet to view portfolio'
+                                        )}
+                                    </p>
+                                </div>
+                                {isConnected && (
+                                    <div className="text-right">
+                                        <div className="text-sm text-muted-foreground">Total Balance</div>
+                                        <div className="text-2xl font-bold font-mono">$12,450.00</div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {[
+                                    { symbol: 'BNB', balance: '1.24', value: '$744', color: 'bg-[#F0B90B]/10 text-[#F0B90B]' },
+                                    { symbol: 'USDT', balance: '5,230', value: '$5,230', color: 'bg-green-500/10 text-green-500' },
+                                    { symbol: 'WBNB', balance: '10.5', value: '$6,300', color: 'bg-blue-500/10 text-blue-500' },
+                                    { symbol: 'CAKE', balance: '150', value: '$225', color: 'bg-pink-500/10 text-pink-500' }
+                                ].map((token) => (
+                                    <div key={token.symbol} className="p-3 rounded-lg bg-background/50 border border-border hover:border-border/80 transition-colors">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <span className={`px-2 py-0.5 rounded text-xs font-bold ${token.color}`}>
+                                                {token.symbol}
+                                            </span>
+                                        </div>
+                                        <div className="font-mono font-medium">{token.balance}</div>
+                                        <div className="text-xs text-muted-foreground">{token.value}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right: Key Metrics */}
+                    <div className="space-y-4">
                         <motion.div
-                            key={stat.label}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
                             className="stat-card"
                         >
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-muted-foreground text-sm">{stat.label}</span>
-                                <stat.icon className="w-5 h-5 text-muted-foreground" />
+                                <span className="text-muted-foreground text-sm">Total Value Locked</span>
+                                <Activity className="w-4 h-4 text-primary" />
                             </div>
-                            <div className="text-2xl font-bold">{stat.value}</div>
-                            <div className={`text-sm mt-1 ${stat.positive === true ? 'text-accent-green' :
-                                stat.positive === false ? 'text-accent-red' : 'text-dark-400'
-                                }`}>
-                                {stat.change}
+                            <div className="text-2xl font-bold">$12,450</div>
+                            <div className="text-sm text-accent-green flex items-center gap-1">
+                                <TrendingUp className="w-3 h-3" />
+                                +5.2% (24h)
                             </div>
                         </motion.div>
-                    ))}
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="p-4 rounded-xl bg-card border border-border">
+                                <div className="text-sm text-muted-foreground mb-1">Fees (24h)</div>
+                                <div className="text-lg font-bold text-accent-green">$156.80</div>
+                            </div>
+                            <div className="p-4 rounded-xl bg-card border border-border">
+                                <div className="text-sm text-muted-foreground mb-1">Active Vaults</div>
+                                <div className="text-lg font-bold">3</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Performance Chart */}

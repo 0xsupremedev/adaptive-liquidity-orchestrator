@@ -14,7 +14,7 @@ export function LineShadowText({
     as: Component = "span",
     ...props
 }: LineShadowTextProps) {
-    const MotionComponent = motion(Component as any)
+    const MotionComponent = motion(Component as any) as any
 
     const content = typeof children === "string" ? children : null
 

@@ -52,7 +52,8 @@ export default function Navbar() {
     const navLinks = [
         { label: 'Product', href: '#product' },
         { label: 'How It Works', href: '#how-it-works' },
-        { label: 'Vaults', href: '/dashboard' },
+        { label: 'Vaults', href: '/vaults' },
+        { label: 'AI Center', href: '/ai' },
         { label: 'Security', href: '#security' },
         { label: 'Docs', href: '#' },
         { label: 'Roadmap', href: '#roadmap' },

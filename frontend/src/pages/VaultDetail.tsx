@@ -224,8 +224,8 @@ export default function VaultDetail() {
                                                 <div className="text-xl font-bold">
                                                     {item.unit === '$' ? `$${item.withAI}` : `${item.withAI}%`}
                                                 </div>
-                                                <div className={`text-sm ${isPositive ? 'text-accent-green' : 'text-accent-red'}`}>
-                                                    {isPositive ? '↑' : '↓'} {Math.abs(improvement).toFixed(0)}%
+                                                <div className={`flex items-center gap-1 text-sm ${isPositive ? 'text-accent-green' : 'text-accent-red'}`}>
+                                                    {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />} {Math.abs(improvement).toFixed(0)}%
                                                 </div>
                                             </div>
                                             <div className="text-sm text-muted-foreground mt-1">

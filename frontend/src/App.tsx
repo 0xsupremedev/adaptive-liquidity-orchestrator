@@ -4,6 +4,8 @@ import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import VaultCreate from './pages/VaultCreate';
 import VaultDetail from './pages/VaultDetail';
+import Vaults from './pages/Vaults';
+import AIOrchestrator from './pages/AIOrchestrator';
 
 import { HeroBackground } from './components/HeroBackground';
 
@@ -19,6 +21,8 @@ function App() {
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/vaults/create" element={<VaultCreate />} />
                         <Route path="/vaults/:vaultId" element={<VaultDetail />} />
+                        <Route path="/vaults" element={<Vaults />} />
+                        <Route path="/ai" element={<AIOrchestrator />} />
                     </Routes>
                 </main>
             </div>
